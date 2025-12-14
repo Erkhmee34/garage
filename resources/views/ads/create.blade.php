@@ -1,15 +1,16 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="py-12 bg-gradient-to-b from-gray-50 to-white min-h-screen">
         <div class="max-w-2xl mx-auto px-4">
-            <h1 class="text-3xl font-bold mb-8">Шинэ зар оруулах</h1>
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-amber-100">
+                <h1 class="text-4xl font-black mb-8 text-amber-900">✨ Шинэ гитар зар оруулах</h1>
 
             <form method="POST" action="/ads" enctype="multipart/form-data">
                 @csrf
 
-                <div class="mb-6">
-                    <label class="block text-sm font-bold mb-2">Зураг (заавал биш)</label>
-                    <input type="file" name="image" accept="image/*" class="w-full p-3 border rounded-lg">
-                    <p class="text-xs text-gray-500 mt-1">JPG, PNG, GIF. Хамгийн их 5MB</p>
+                <div class="mb-6 p-4 bg-amber-50 rounded-xl border-2 border-amber-200">
+                    <label class="block text-sm font-bold mb-2 text-amber-900">🖼️ Зураг (заавал биш)</label>
+                    <input type="file" name="image" accept="image/*" class="w-full p-3 border-2 border-dashed border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <p class="text-xs text-amber-700 mt-2">JPG, PNG, GIF. Хамгийн их 5MB</p>
                     @error('image') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                 </div>
 
@@ -29,12 +30,12 @@
                     <label class="block text-sm font-bold mb-2">Категори <span class="text-red-500">*</span></label>
                     <select name="category" required class="w-full p-3 border rounded-lg">
                         <option value="">Сонгоно уу</option>
-                        <option value="Vehicles" {{ old('category')=='Vehicles' ? 'selected' : '' }}>Машины зар</option>
-                        <option value="Jobs" {{ old('category')=='Jobs' ? 'selected' : '' }}>Ажлын байр</option>
-                        <option value="Real Estate" {{ old('category')=='Real Estate' ? 'selected' : '' }}>Үл хөдлөх хөрөнгө</option>
+                        <option value="Guitars" {{ old('category')=='Guitars' ? 'selected' : '' }}>Гитар</option>
+                        <option value="Amps" {{ old('category')=='Amps' ? 'selected' : '' }}>Амп</option>
+                        <option value="Pedals" {{ old('category')=='Pedals' ? 'selected' : '' }}>Педаль</option>
+                        <option value="Accessories" {{ old('category')=='Accessories' ? 'selected' : '' }}>Хэсэг/Дагалдах хэрэгсэл</option>
+                        <option value="Parts" {{ old('category')=='Parts' ? 'selected' : '' }}>Сэлбэг</option>
                         <option value="Services" {{ old('category')=='Services' ? 'selected' : '' }}>Үйлчилгээ</option>
-                        <option value="For Sale" {{ old('category')=='For Sale' ? 'selected' : '' }}>Зарна</option>
-                        <option value="Community" {{ old('category')=='Community' ? 'selected' : '' }}>Нийгэм</option>
                     </select>
                 </div>
 
@@ -48,13 +49,46 @@
                     <input type="text" name="phone" value="{{ old('phone') }}" class="w-full p-3 border rounded-lg">
                 </div>
 
-                <div class="flex gap-4">
-                    <button type="submit" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700">
-                        Зар оруулах
-                    </button>
-                    <a href="/ads" class="px-6 py-3 border rounded-lg text-gray-700 hover:bg-gray-100">Буцах</a>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2">Брэнд</label>
+                    <input type="text" name="brand" value="{{ old('brand') }}" class="w-full p-3 border rounded-lg">
                 </div>
-            </form>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2">Модель</label>
+                    <input type="text" name="model" value="{{ old('model') }}" class="w-full p-3 border rounded-lg">
+                </div>
+
+                <div class="mb-4 grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Жил</label>
+                        <input type="text" name="year" value="{{ old('year') }}" class="w-full p-3 border rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2">Байдал</label>
+                        <select name="condition" class="w-full p-3 border rounded-lg">
+                            <option value="">Сонгоно уу</option>
+                            <option value="New" {{ old('condition')=='New' ? 'selected' : '' }}>Шинэ</option>
+                            <option value="Like New" {{ old('condition')=='Like New' ? 'selected' : '' }}>Шинэ мэт</option>
+                            <option value="Good" {{ old('condition')=='Good' ? 'selected' : '' }}>Сайн</option>
+                            <option value="Fair" {{ old('condition')=='Fair' ? 'selected' : '' }}>Дундаж</option>
+                            <option value="For Parts" {{ old('condition')=='For Parts' ? 'selected' : '' }}>Сэлбэгэнд</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2">Байршил (хот)</label>
+                    <input type="text" name="location" value="{{ old('location') }}" class="w-full p-3 border rounded-lg">
+                </div>
+
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-xl font-bold hover:from-green-600 hover:to-emerald-700 transition shadow-lg text-lg">
+                        ✨ Зар оруулах
+                    </button>
+                    <a href="/ads" class="px-6 py-3 border-2 border-gray-300 rounded-xl text-gray-700 hover:bg-gray-100 font-bold transition">← Буцах</a>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

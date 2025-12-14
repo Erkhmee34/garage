@@ -29,14 +29,14 @@ class AdController extends Controller
 
         $ads = $ads->with('user')->paginate(12); // user-г нэг удаа ачаална
 
-        $categories = ['Vehicles', 'Jobs', 'Real Estate', 'Services', 'For Sale', 'Community'];
+        $categories = ['Guitars', 'Amps', 'Pedals', 'Accessories', 'Parts', 'Services'];
 
         return view('ads.index', compact('ads', 'categories', 'search', 'category'));
     }
 
     public function create()
     {
-        $categories = ['Vehicles', 'Jobs', 'Real Estate', 'Services', 'For Sale', 'Community'];
+        $categories = ['Guitars', 'Amps', 'Pedals', 'Accessories', 'Parts', 'Services'];
         return view('ads.create', compact('categories'));
     }
 
@@ -46,6 +46,11 @@ class AdController extends Controller
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
             'category'    => 'required|string',
+            'brand'       => 'nullable|string|max:100',
+            'model'       => 'nullable|string|max:100',
+            'year'        => 'nullable|string|max:10',
+            'condition'   => 'nullable|in:New,Like New,Good,Fair,For Parts',
+            'location'    => 'nullable|string|max:100',
             'price'       => 'nullable|numeric|min:0',
             'phone'       => 'nullable|string|max:20',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
@@ -91,7 +96,7 @@ class AdController extends Controller
     public function edit(Ad $ad)
     {
         $this->authorize('update', $ad);
-        $categories = ['Vehicles', 'Jobs', 'Real Estate', 'Services', 'For Sale', 'Community'];
+        $categories = ['Guitars', 'Amps', 'Pedals', 'Accessories', 'Parts', 'Services'];
         return view('ads.edit', compact('ad', 'categories'));
     }
 
@@ -103,6 +108,11 @@ class AdController extends Controller
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
             'category'    => 'required|string',
+            'brand'       => 'nullable|string|max:100',
+            'model'       => 'nullable|string|max:100',
+            'year'        => 'nullable|string|max:10',
+            'condition'   => 'nullable|in:New,Like New,Good,Fair,For Parts',
+            'location'    => 'nullable|string|max:100',
             'price'       => 'nullable|numeric|min:0',
             'phone'       => 'nullable|string|max:20',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
