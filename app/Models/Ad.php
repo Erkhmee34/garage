@@ -18,6 +18,11 @@ class Ad extends Model
         'category',
         'price',
         'phone',
+        'brand',
+        'model',
+        'year',
+        'condition',
+        'location',
         'user_id',
         'image',
     ];
